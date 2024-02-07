@@ -2,6 +2,8 @@
 #include <conio.h>
 #include <SFML/Network.hpp>
 
+#include "ConsoleControl.h"
+
 void RunClient();
 void RunServer();
 
@@ -15,9 +17,7 @@ int main()
 
     do {
 
-        if (_kbhit()) {
-            mode = _getch();
-        }
+        mode = ConsoleControl::WaithForReadNextChar();
 
     } while (mode != 'C' && mode != 'c' && mode != 'S' && mode != 's');
 
@@ -43,7 +43,9 @@ void RunClient() {
 
     std::cout << "Client";
 
-    sf::TcpSocket socket;
+
+
+    /*sf::TcpSocket socket;
     sf::Socket::Status status = socket.connect("10.40.2.45", port); //10.40.2.45
 
     if (status != sf::Socket::Done) {
@@ -68,7 +70,7 @@ void RunClient() {
             std::cout << std::endl << "Error sending message";
         }
 
-    }
+    }*/
 
 }
 
@@ -76,6 +78,7 @@ void RunServer() {
 
     std::cout << "Server";
 
+    /*
     sf::TcpListener listener;
 
     if (listener.listen(port) != sf::Socket::Done) {
@@ -111,6 +114,6 @@ void RunServer() {
 
             std::cout << std::endl << message;
         }
-    }
+    }*/
 
 }
