@@ -3,6 +3,7 @@
 #include <SFML/Network.hpp>
 
 #include "ConsoleControl.h"
+#include "Chat.h"
 
 void RunClient();
 void RunServer();
@@ -43,77 +44,18 @@ void RunClient() {
 
     std::cout << "Client";
 
+    std::cout << std::endl << "Set server IP -->";
 
+    std::string ip;
+    std::getline(std::cin, ip);
 
-    /*sf::TcpSocket socket;
-    sf::Socket::Status status = socket.connect("10.40.2.45", port); //10.40.2.45
-
-    if (status != sf::Socket::Done) {
-        std::cout << std::endl << "Error on connect to server";
-        return;
-    }
-
-    while (true)
-    {
-        std::cout << std::endl << "Next Message: ";
-        std::string message;
-        std::getline(std::cin, message);
-
-        char data[100];
-
-        int stringSize = message.length();
-        for (int i = 0; i < stringSize; i++) {
-            data[i] = message[i];
-        }
-
-        if (socket.send(data, 100) != sf::Socket::Done) {
-            std::cout << std::endl << "Error sending message";
-        }
-
-    }*/
-
+    Chat* chat = Chat::Client(ip, port);
 }
 
 void RunServer() {
 
     std::cout << "Server";
 
-    /*
-    sf::TcpListener listener;
-
-    if (listener.listen(port) != sf::Socket::Done) {
-        std::cout << std::endl << "Error on start listener";
-        return;
-    }
-
-    sf::IpAddress ipAddress = sf::IpAddress::getLocalAddress();
-    std::cout << std::endl << "Listening on IP: " + ipAddress.toString();
-
-    sf::TcpSocket client;
-
-    if (listener.accept(client) != sf::Socket::Done) {
-        std::cout << std::endl << "Error on accept Client";
-        return;
-    }
-
-    std::cout << std::endl << "Client Connected" << client.getRemoteAddress().toString();
-
-    while (true) {
-        char data[100];
-        std::size_t received;
-
-        std::string message;
-
-        if (client.receive(data, 100, received) != sf::Socket::Done) {
-            std::cout << std::endl << "Error receiving message";
-        }
-        else {
-            for (size_t i = 0; i < received; i++) {
-                message += data[i];
-            }
-
-            std::cout << std::endl << message;
-        }
-    }*/
+    Chat* chat = Chat::Server(port);
 
 }
