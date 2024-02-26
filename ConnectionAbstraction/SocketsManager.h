@@ -29,7 +29,7 @@ private:
 	std::list<TcpSocket*> _sockets;
 	std::mutex _socketsMutex;
 
-	OnSocketConnected _OnSocketConnected;
+	OnSocketConnected _onSocketConnected;
 
 	void SelectorLoop();
 	void CheckListener();
